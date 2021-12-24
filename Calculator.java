@@ -4,7 +4,8 @@ import java.awt.*;
 import java.awt.event.*;
 
 /**
- * Java GUI Calculator: calculates from left to right with no order of operations
+ * Java GUI Calculator: calculates from left to right with no order of
+ * operations
  * 
  * @author Kyle Huang
  * @version 5.8
@@ -13,14 +14,13 @@ import java.awt.event.*;
 public class Calculator extends JFrame {
     private JFrame frame;
     private JTextArea text;
-    private JButton zero, one, two, three, four, five, six, seven, eight, nine,
-            add, subtract, multiply, divide, clear, delete, equal;
-
+    private JButton zero, one, two, three, four, five, six, seven, eight,
+            nine, add, subtract, multiply, divide, clear, delete, equal;
 
     /**
      * PRE: requires coordinates and name for frame,
-     *      coordinates and size for text area, and
-     *      size for buttons.
+     * coordinates and size for text area, and
+     * size for buttons.
      * POST: creates the frame, textarea, and buttons.
      */
     public Calculator() {
@@ -32,6 +32,7 @@ public class Calculator extends JFrame {
     /**
      * PRE: require string from textarea block
      * POST: calculates the expression from the string
+     * 
      * @param equ equation or expression
      * @return result of expression
      */
@@ -65,9 +66,10 @@ public class Calculator extends JFrame {
     /**
      * PRE: requires size and name
      * POST: set the size and name of frame
-     * @param width width of frame
+     * 
+     * @param width  width of frame
      * @param height height of frame
-     * @param name name of frame
+     * @param name   name of frame
      */
     private void createFrame(int width, int height, String name) {
         this.frame = new JFrame(name);
@@ -81,6 +83,7 @@ public class Calculator extends JFrame {
     /**
      * PRE: requires coordinates and size
      * POST: set the coordinates and size of text area
+     * 
      * @param x starting x-coordinate of text area
      * @param y starting y-coordinate of text area
      * @param w width of text area
@@ -99,6 +102,7 @@ public class Calculator extends JFrame {
     /**
      * PRE: requires size of buttons
      * POST: creates the buttons and its functionalities
+     * 
      * @param w width of buttons
      * @param h height of buttons
      */
@@ -123,7 +127,8 @@ public class Calculator extends JFrame {
         equal = new JButton("=");
 
         // variables
-        int gap = (this.frame.getWidth() - (4 * w)) / 5, startX = 10, startY = 60;
+        int gap = (this.frame.getWidth() - (4 * w)) / 5, startX = 10,
+                startY = 60;
         ArrayList<ArrayList<JButton>> list = new ArrayList<>();
 
         // add buttons to arraylist
@@ -141,17 +146,20 @@ public class Calculator extends JFrame {
                 JButton tempBtn = temp.get(j);
                 tempBtn.setBounds(startX + (w * j) + (gap * j),
                         startY + (i * h) + (i * gap), w, h);
+
                 // create functionalities
                 tempBtn.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         String BtnText = tempBtn.getText();
                         if (BtnText.equalsIgnoreCase("="))
-                            text.setText(String.valueOf(calculate(text.getText())));
+                            text.setText(String.valueOf(calculate(
+                                    text.getText())));
                         else if (BtnText.equalsIgnoreCase("C"))
                             text.setText("");
                         else if (BtnText.equalsIgnoreCase("\u232B")) {
                             if (text.getText().length() > 0)
-                                text.setText(text.getText().substring(0, text.getText().length() - 1));
+                                text.setText(text.getText().substring(0,
+                                        text.getText().length() - 1));
                         } else {
                             if (BtnText.equalsIgnoreCase("+")
                                     || BtnText.equalsIgnoreCase("-")
