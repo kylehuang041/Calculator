@@ -4,9 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 /**
- * Calculator
- * ----------
- * Java GUI Calculator
+ * Java GUI Calculator: calculates from left to right with no order of operations
  * 
  * @author Kyle Huang
  * @version 5.8
@@ -18,15 +16,25 @@ public class Calculator extends JFrame {
     private JButton zero, one, two, three, four, five, six, seven, eight, nine,
             add, subtract, multiply, divide, clear, delete, equal;
 
+
     /**
-     * Constructor
-     * PRE: None
-     * POST: creates the frame, buttons, and button functionalities
+     * PRE: requires coordinates and name for frame,
+     *      coordinates and size for text area, and
+     *      size for buttons.
+     * POST: creates the frame, textarea, and buttons.
      */
     public Calculator() {
-        create();
+        createFrame(300, 400, "Calculator");
+        createTextArea(10, 10, 280, 40);
+        createButtons(52, 40);
     }
 
+    /**
+     * PRE: require string from textarea block
+     * POST: calculates the expression from the string
+     * @param equ equation or expression
+     * @return result of expression
+     */
     private long calculate(String equ) {
         Scanner reader = new Scanner(equ);
         long res = 0;
@@ -54,12 +62,13 @@ public class Calculator extends JFrame {
         return res;
     }
 
-    private void create() {
-        createFrame(300, 400, "Calculator");
-        createTextArea(10, 10, 280, 40);
-        createButtons(52, 40);
-    }
-
+    /**
+     * PRE: requires size and name
+     * POST: set the size and name of frame
+     * @param width width of frame
+     * @param height height of frame
+     * @param name name of frame
+     */
     private void createFrame(int width, int height, String name) {
         this.frame = new JFrame(name);
         this.frame.setSize(width, height);
@@ -69,6 +78,14 @@ public class Calculator extends JFrame {
         this.frame.setVisible(true);
     }
 
+    /**
+     * PRE: requires coordinates and size
+     * POST: set the coordinates and size of text area
+     * @param x starting x-coordinate of text area
+     * @param y starting y-coordinate of text area
+     * @param w width of text area
+     * @param h height of text area
+     */
     private void createTextArea(int x, int y, int w, int h) {
         this.text = new JTextArea();
         this.text.setLocation(x, y);
@@ -79,6 +96,12 @@ public class Calculator extends JFrame {
         this.frame.add(text);
     }
 
+    /**
+     * PRE: requires size of buttons
+     * POST: creates the buttons and its functionalities
+     * @param w width of buttons
+     * @param h height of buttons
+     */
     private void createButtons(int w, int h) {
         // create buttons
         zero = new JButton("0");
@@ -118,6 +141,7 @@ public class Calculator extends JFrame {
                 JButton tempBtn = temp.get(j);
                 tempBtn.setBounds(startX + (w * j) + (gap * j),
                         startY + (i * h) + (i * gap), w, h);
+                // create functionalities
                 tempBtn.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         String BtnText = tempBtn.getText();
