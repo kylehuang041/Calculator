@@ -15,7 +15,8 @@ public class Calculator extends JFrame {
     private JFrame frame;
     private JTextArea text;
     private JButton zero, one, two, three, four, five, six, seven, eight,
-            nine, add, subtract, multiply, divide, clear, delete, equal;
+            nine, add, subtract, multiply, divide, clear, delete, equal,
+            negative, power, factorial;
 
     /**
      * PRE: requires coordinates and name for frame,
@@ -47,15 +48,30 @@ public class Calculator extends JFrame {
                     res += Long.parseLong(reader.next());
                 else if (tmp.equalsIgnoreCase("-"))
                     res -= Long.parseLong(reader.next());
-                else if (tmp.equalsIgnoreCase("*"))
+                else if (tmp.contains("-")) {
+                    tmp = tmp.replace("(", "").replace(")", "");
+                    res += Long.parseLong(tmp);
+                } else if (tmp.equalsIgnoreCase("*"))
                     res *= Long.parseLong(reader.next());
                 else if (tmp.equalsIgnoreCase("/"))
                     res /= Long.parseLong(reader.next());
-                else
+                else if (tmp.contains("^")) {
+                    String[] parts = tmp.replace("^", " ").split(" ");
+                    res += power(Long.parseLong(parts[0]),
+                            Long.parseLong(parts[1]));
+                } else if (tmp.contains("!")) {
+                    String[] parts = tmp.replace("!", " ").split(" ");
+                    System.out.println("!" + parts[0]);
+                    res += factorial(Long.parseLong(parts[0]));
+                } else
                     res += Double.parseDouble(tmp);
             }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Error: Numbers split");
+        } catch (NumberFormatException e) {
+            System.out.println("Error: Number formating");
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Error: finish the expression");
         } finally {
             reader.close();
         }
@@ -125,6 +141,9 @@ public class Calculator extends JFrame {
         clear = new JButton("C");
         delete = new JButton("\u232B");
         equal = new JButton("=");
+        negative = new JButton("(-)");
+        power = new JButton("^");
+        factorial = new JButton("!");
 
         // variables
         int gap = (this.frame.getWidth() - (4 * w)) / 5, startX = 10,
@@ -137,7 +156,8 @@ public class Calculator extends JFrame {
         list.add(new ArrayList<>(Arrays.asList(seven, eight, nine, add)));
         list.add(new ArrayList<>(Arrays.asList(subtract, zero, multiply,
                 divide)));
-        list.add(new ArrayList<>(Arrays.asList(equal)));
+        list.add(new ArrayList<>(Arrays.asList(negative, power, factorial,
+                equal)));
 
         // place and add buttons onto screen
         for (int i = 0; i < list.size(); i++) {
@@ -159,20 +179,35 @@ public class Calculator extends JFrame {
                         else if (BtnText.equalsIgnoreCase("\u232B")) {
                             if (text.getText().length() > 0)
                                 text.setText(text.getText().substring(0,
-                                        text.getText().length() - 1));
-                        } else {
-                            if (BtnText.equalsIgnoreCase("+")
-                                    || BtnText.equalsIgnoreCase("-")
-                                    || BtnText.equalsIgnoreCase("*")
-                                    || BtnText.equalsIgnoreCase("/"))
-                                text.append(" " + BtnText + " ");
-                            else
-                                text.append(BtnText);
+                                    text.getText().length() - 1));
+                        } else if (BtnText.equalsIgnoreCase("+")
+                                || BtnText.equalsIgnoreCase("-")
+                                || BtnText.equalsIgnoreCase("*")
+                                || BtnText.equalsIgnoreCase("/"))
+                            text.append(" " + BtnText + " ");
+                        else {
+                            if (BtnText.equalsIgnoreCase("(-)")) {
+                                text.append(BtnText.replace("(", "").replace(")",
+                                ""));
+                            } else text.append(BtnText);
                         }
                     }
                 });
                 this.frame.add(temp.get(j));
             }
         }
+    }
+
+    private long power(long base, long exponent) {
+        long res = 1;
+        for (int i = 1; i <= exponent; i++) {
+            res *= base;
+        }
+        return res;
+    }
+
+    private long factorial(long num) {
+        if (num == 0) return 1;
+        return num * factorial(num - 1);
     }
 }
