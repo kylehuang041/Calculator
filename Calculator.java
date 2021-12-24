@@ -24,7 +24,7 @@ public class Calculator extends JFrame implements ActionListener {
     private void create() {
         createFrame(300, 400, "Calculator");
         createTextArea(10, 10, 280, 40);
-        createButtons(50, 40);
+        createButtons(52, 40);
     }
 
     private void createFrame(int width, int height, String name) {
@@ -63,7 +63,7 @@ public class Calculator extends JFrame implements ActionListener {
         multiply = new JButton("x");
         divide = new JButton("/");
         clear = new JButton("C");
-        delete = new JButton("del");
+        delete = new JButton("\u232B");
         equal = new JButton("=");
 
         // variables
@@ -87,14 +87,14 @@ public class Calculator extends JFrame implements ActionListener {
                         startY + (i * h) + (i * gap), w, h);
                 tempBtn.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                        String textTemp = tempBtn.getText();
-                        if (textTemp.equalsIgnoreCase("C"))
-                            text.setText("");
-                        else if (textTemp.equalsIgnoreCase("del")) {
+                        String BtnText = tempBtn.getText();
+                        if (BtnText.equalsIgnoreCase("=")) text.setText(String.valueOf(calculate(text.getText())));
+                        else if (BtnText.equalsIgnoreCase("C")) text.setText("");
+                        else if (BtnText.equalsIgnoreCase("\u232B")) {
                             if (text.getText().length() > 0)
                             text.setText(text.getText().substring(0, text.getText().length() - 1));
                         } else
-                            text.append(textTemp);
+                            text.append(BtnText);
                     }
                 });
                 this.frame.add(temp.get(j));
