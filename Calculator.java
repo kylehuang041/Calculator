@@ -17,8 +17,31 @@ public class Calculator extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
     }
 
-    private double calculate(String equ) {
-        return -1;
+    private long calculate(String equ) {
+        Scanner reader = new Scanner(equ);
+        long res = 0;
+
+        try {
+            while (reader.hasNext()) {
+                String tmp = reader.next();
+                if (tmp.equalsIgnoreCase("+"))
+                    res += Long.parseLong(reader.next());
+                else if (tmp.equalsIgnoreCase("-"))
+                    res -= Long.parseLong(reader.next());
+                else if (tmp.equalsIgnoreCase("*"))
+                    res *= Long.parseLong(reader.next());
+                else if (tmp.equalsIgnoreCase("/"))
+                    res /= Long.parseLong(reader.next());
+                else
+                    res += Double.parseDouble(tmp);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            reader.close();
+        }
+
+        return res;
     }
 
     private void create() {
@@ -88,13 +111,21 @@ public class Calculator extends JFrame implements ActionListener {
                 tempBtn.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         String BtnText = tempBtn.getText();
-                        if (BtnText.equalsIgnoreCase("=")) text.setText(String.valueOf(calculate(text.getText())));
-                        else if (BtnText.equalsIgnoreCase("C")) text.setText("");
+                        if (BtnText.equalsIgnoreCase("="))
+                            text.setText(String.valueOf(calculate(text.getText())));
+                        else if (BtnText.equalsIgnoreCase("C"))
+                            text.setText("");
                         else if (BtnText.equalsIgnoreCase("\u232B")) {
                             if (text.getText().length() > 0)
-                            text.setText(text.getText().substring(0, text.getText().length() - 1));
-                        } else
-                            text.append(BtnText);
+                                text.setText(text.getText().substring(0, text.getText().length() - 1));
+                        } else {
+                            if (BtnText.equalsIgnoreCase("+") 
+                            || BtnText.equalsIgnoreCase("-")
+                            || BtnText.equalsIgnoreCase("*")
+                            || BtnText.equalsIgnoreCase("/"))
+                            text.append(" " + BtnText + " ");
+                            else text.append(BtnText);
+                        }
                     }
                 });
                 this.frame.add(temp.get(j));
