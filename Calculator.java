@@ -46,6 +46,7 @@ public class Calculator extends JFrame implements ActionListener {
     }
 
     private void createButtons(int w, int h) {
+        // create buttons
         zero = new JButton("0");
         one = new JButton("1");
         two = new JButton("2");
@@ -63,19 +64,24 @@ public class Calculator extends JFrame implements ActionListener {
         clear = new JButton("C");
         delete = new JButton("del");
         equal = new JButton("=");
+
+        // variables
         int gap = (this.frame.getWidth() - (4*w)) / 5, startX = 10, startY = 60;
         ArrayList<ArrayList<JButton>> list = new ArrayList<>();
+
+        // add buttons to arraylist
         list.add(new ArrayList<>(Arrays.asList(one, two, three, delete)));
         list.add(new ArrayList<>(Arrays.asList(four, five, six, clear)));
         list.add(new ArrayList<>(Arrays.asList(seven, eight, nine, add)));
-        list.add(new ArrayList<>(Arrays.asList(subtract, zero, multiply, divide)));
+        list.add(new ArrayList<>(Arrays.asList(subtract, zero, multiply,
+        divide)));
         list.add(new ArrayList<>(Arrays.asList(equal)));
+
+        // place and add buttons onto screen
         for (int i = 0; i < list.size(); i++) {
             ArrayList<JButton> temp = list.get(i);
-            if (temp == null) break;
             for (int j = 0; j < list.get(i).size(); j++) {
                 JButton tempBtn = temp.get(j);
-                if (tempBtn == null) break;
                 tempBtn.setBounds(startX + (w*j) + (gap*j),
                 startY + (i*h) + (i*gap), w, h);
                 tempBtn.addActionListener(new ActionListener() {
