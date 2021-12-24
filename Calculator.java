@@ -198,6 +198,13 @@ public class Calculator extends JFrame {
         }
     }
 
+    /**
+     * PRE: requires a base and exponent
+     * POST: return the result of a exponential expression
+     * @param base base number
+     * @param exponent exponent number
+     * @return result -> result of a exponential expression
+     */
     private long power(long base, long exponent) {
         long res = 1;
         for (int i = 1; i <= exponent; i++) {
@@ -206,6 +213,12 @@ public class Calculator extends JFrame {
         return res;
     }
 
+    /**
+     * PRE: requires a starting value
+     * POST: return the factorial of the value
+     * @param num starting value or value
+     * @return result -> factorial of the value
+     */
     private long factorial(long num) {
         if (num == 0) return 1;
         return num * factorial(num - 1);
