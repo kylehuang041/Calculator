@@ -3,18 +3,28 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class Calculator extends JFrame implements ActionListener {
+/**
+ * Calculator
+ * ----------
+ * Java GUI Calculator
+ * 
+ * @author Kyle Huang
+ * @version 5.8
+ * @since 12/23/2021
+ */
+public class Calculator extends JFrame {
     private JFrame frame;
     private JTextArea text;
     private JButton zero, one, two, three, four, five, six, seven, eight, nine,
             add, subtract, multiply, divide, clear, delete, equal;
 
+    /**
+     * Constructor
+     * PRE: None
+     * POST: creates the frame, buttons, and button functionalities
+     */
     public Calculator() {
         create();
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
     }
 
     private long calculate(String equ) {
@@ -83,7 +93,7 @@ public class Calculator extends JFrame implements ActionListener {
         nine = new JButton("9");
         add = new JButton("+");
         subtract = new JButton("-");
-        multiply = new JButton("x");
+        multiply = new JButton("*");
         divide = new JButton("/");
         clear = new JButton("C");
         delete = new JButton("\u232B");
@@ -119,12 +129,13 @@ public class Calculator extends JFrame implements ActionListener {
                             if (text.getText().length() > 0)
                                 text.setText(text.getText().substring(0, text.getText().length() - 1));
                         } else {
-                            if (BtnText.equalsIgnoreCase("+") 
-                            || BtnText.equalsIgnoreCase("-")
-                            || BtnText.equalsIgnoreCase("*")
-                            || BtnText.equalsIgnoreCase("/"))
-                            text.append(" " + BtnText + " ");
-                            else text.append(BtnText);
+                            if (BtnText.equalsIgnoreCase("+")
+                                    || BtnText.equalsIgnoreCase("-")
+                                    || BtnText.equalsIgnoreCase("*")
+                                    || BtnText.equalsIgnoreCase("/"))
+                                text.append(" " + BtnText + " ");
+                            else
+                                text.append(BtnText);
                         }
                     }
                 });
