@@ -14,7 +14,8 @@ public class Calculator extends JFrame implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {}
+    public void actionPerformed(ActionEvent e) {
+    }
 
     private double calculate(String equ) {
         return -1;
@@ -38,7 +39,7 @@ public class Calculator extends JFrame implements ActionListener {
     private void createTextArea(int x, int y, int w, int h) {
         this.text = new JTextArea();
         this.text.setLocation(x, y);
-        this.text.setSize(w - (2*x), h);
+        this.text.setSize(w - (2 * x), h);
         Font font1 = new Font("SansSerif", Font.BOLD, 22);
         this.text.setFont(font1);
         this.text.setEditable(false);
@@ -66,7 +67,7 @@ public class Calculator extends JFrame implements ActionListener {
         equal = new JButton("=");
 
         // variables
-        int gap = (this.frame.getWidth() - (4*w)) / 5, startX = 10, startY = 60;
+        int gap = (this.frame.getWidth() - (4 * w)) / 5, startX = 10, startY = 60;
         ArrayList<ArrayList<JButton>> list = new ArrayList<>();
 
         // add buttons to arraylist
@@ -74,7 +75,7 @@ public class Calculator extends JFrame implements ActionListener {
         list.add(new ArrayList<>(Arrays.asList(four, five, six, clear)));
         list.add(new ArrayList<>(Arrays.asList(seven, eight, nine, add)));
         list.add(new ArrayList<>(Arrays.asList(subtract, zero, multiply,
-        divide)));
+                divide)));
         list.add(new ArrayList<>(Arrays.asList(equal)));
 
         // place and add buttons onto screen
@@ -82,11 +83,18 @@ public class Calculator extends JFrame implements ActionListener {
             ArrayList<JButton> temp = list.get(i);
             for (int j = 0; j < list.get(i).size(); j++) {
                 JButton tempBtn = temp.get(j);
-                tempBtn.setBounds(startX + (w*j) + (gap*j),
-                startY + (i*h) + (i*gap), w, h);
+                tempBtn.setBounds(startX + (w * j) + (gap * j),
+                        startY + (i * h) + (i * gap), w, h);
                 tempBtn.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                        text.append(tempBtn.getText());
+                        String textTemp = tempBtn.getText();
+                        if (textTemp.equalsIgnoreCase("C"))
+                            text.setText("");
+                        else if (textTemp.equalsIgnoreCase("del")) {
+                            if (text.getText().length() > 0)
+                            text.setText(text.getText().substring(0, text.getText().length() - 1));
+                        } else
+                            text.append(textTemp);
                     }
                 });
                 this.frame.add(temp.get(j));
