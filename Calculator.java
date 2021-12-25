@@ -109,8 +109,8 @@ public class Calculator extends JFrame {
         this.text = new JTextArea();
         this.text.setLocation(x, y);
         this.text.setSize(w - (2 * x), h);
-        Font font1 = new Font("SansSerif", Font.BOLD, 22);
-        this.text.setFont(font1);
+        Font font = new Font("SansSerif", Font.BOLD, 22);
+        this.text.setFont(font);
         this.text.setEditable(false);
         this.frame.add(text);
     }
@@ -164,6 +164,8 @@ public class Calculator extends JFrame {
             ArrayList<JButton> temp = list.get(i);
             for (int j = 0; j < list.get(i).size(); j++) {
                 JButton tempBtn = temp.get(j);
+                Font font = new Font("SansSerif", Font.BOLD, 22);
+                tempBtn.setFont(font);
                 tempBtn.setBounds(startX + (w * j) + (gap * j),
                         startY + (i * h) + (i * gap), w, h);
 
