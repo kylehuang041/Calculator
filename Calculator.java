@@ -16,7 +16,7 @@ public class Calculator extends JFrame {
     private JTextArea text;
     private JButton zero, one, two, three, four, five, six, seven, eight,
             nine, add, subtract, multiply, divide, clear, delete, equal,
-            negative, power, factorial;
+            negative, power, factorial, decimal;
 
     /**
      * PRE: requires coordinates and name for frame,
@@ -25,9 +25,9 @@ public class Calculator extends JFrame {
      * POST: creates the frame, textarea, and buttons.
      */
     public Calculator() {
-        createFrame(300, 400, "Calculator");
+        createFrame(330, 440, "Calculator");
         createTextArea(10, 10, 280, 40);
-        createButtons(52, 40);
+        createButtons(60, 40);
     }
 
     /**
@@ -144,6 +144,7 @@ public class Calculator extends JFrame {
         negative = new JButton("(-)");
         power = new JButton("^");
         factorial = new JButton("!");
+        decimal = new JButton(".");
 
         // variables
         int gap = (this.frame.getWidth() - (4 * w)) / 5, startX = 10,
@@ -158,13 +159,14 @@ public class Calculator extends JFrame {
                 divide)));
         list.add(new ArrayList<>(Arrays.asList(negative, power, factorial,
                 equal)));
+        list.add(new ArrayList<>(Arrays.asList(decimal)));
 
         // place and add buttons onto screen
         for (int i = 0; i < list.size(); i++) {
             ArrayList<JButton> temp = list.get(i);
             for (int j = 0; j < list.get(i).size(); j++) {
                 JButton tempBtn = temp.get(j);
-                Font font = new Font("SansSerif", Font.BOLD, 22);
+                Font font = new Font("SansSerif", Font.BOLD, 16);
                 tempBtn.setFont(font);
                 tempBtn.setBounds(startX + (w * j) + (gap * j),
                         startY + (i * h) + (i * gap), w, h);
