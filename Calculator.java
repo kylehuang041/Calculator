@@ -26,7 +26,7 @@ public class Calculator extends JFrame {
      */
     public Calculator() {
         createFrame(330, 440, "Calculator");
-        createTextArea(10, 10, 280, 40);
+        createTextArea(10, 10, 315, 40);
         createButtons(60, 40);
     }
 
@@ -37,32 +37,32 @@ public class Calculator extends JFrame {
      * @param equ equation or expression
      * @return result of expression
      */
-    private long calculate(String equ) {
+    private double calculate(String equ) {
         Scanner reader = new Scanner(equ);
-        long res = 0;
+        double res = 0;
 
         try {
             while (reader.hasNext()) {
                 String tmp = reader.next();
                 if (tmp.equalsIgnoreCase("+"))
-                    res += Long.parseLong(reader.next());
+                    res += Double.parseDouble(reader.next());
                 else if (tmp.equalsIgnoreCase("-"))
-                    res -= Long.parseLong(reader.next());
+                    res -= Double.parseDouble(reader.next());
                 else if (tmp.contains("-")) {
                     tmp = tmp.replace("(", "").replace(")", "");
-                    res += Long.parseLong(tmp);
+                    res += Double.parseDouble(tmp);
                 } else if (tmp.equalsIgnoreCase("*"))
-                    res *= Long.parseLong(reader.next());
+                    res *= Double.parseDouble(reader.next());
                 else if (tmp.equalsIgnoreCase("/"))
-                    res /= Long.parseLong(reader.next());
+                    res /= Double.parseDouble(reader.next());
                 else if (tmp.contains("^")) {
                     String[] parts = tmp.replace("^", " ").split(" ");
-                    res += power(Long.parseLong(parts[0]),
-                            Long.parseLong(parts[1]));
+                    res += power(Double.parseDouble(parts[0]),
+                            Double.parseDouble(parts[1]));
                 } else if (tmp.contains("!")) {
                     String[] parts = tmp.replace("!", " ").split(" ");
                     System.out.println("!" + parts[0]);
-                    res += factorial(Long.parseLong(parts[0]));
+                    res += factorial(Double.parseDouble(parts[0]));
                 } else
                     res += Double.parseDouble(tmp);
             }
@@ -209,8 +209,8 @@ public class Calculator extends JFrame {
      * @param exponent exponent number
      * @return result -> result of a exponential expression
      */
-    private long power(long base, long exponent) {
-        long res = 1;
+    private double power(double base, double exponent) {
+        double res = 1;
         for (int i = 1; i <= exponent; i++) {
             res *= base;
         }
@@ -223,7 +223,7 @@ public class Calculator extends JFrame {
      * @param num starting value or value
      * @return result -> factorial of the value
      */
-    private long factorial(long num) {
+    private double factorial(double num) {
         if (num == 0) return 1;
         return num * factorial(num - 1);
     }
