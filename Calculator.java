@@ -6,6 +6,7 @@ import java.awt.event.*;
 /**
  * Java GUI Calculator: calculates from left to right with no order of
  * operations
+ * 
  * @author Kyle Huang
  * @version 5.8
  * @since 12/23/2021
@@ -32,6 +33,7 @@ public class Calculator extends JFrame {
     /**
      * PRE: require string from textarea block
      * POST: calculates the expression from the string
+     * 
      * @param equ equation or expression
      * @return result of expression
      */
@@ -73,6 +75,7 @@ public class Calculator extends JFrame {
      * POST: If the String contains "^", it would calculate the power.
      * If the String contains "!", it would calculate the factorial.
      * Otherwise, return the String.
+     * 
      * @param tmp temporary String
      * @return finished calculation of power or factorial. Otherwise,
      *         the String itself from the beginning if it does not
@@ -92,6 +95,7 @@ public class Calculator extends JFrame {
     /**
      * PRE: requires size and name
      * POST: set the size and name of frame
+     * 
      * @param width  width of frame
      * @param height height of frame
      * @param name   name of frame
@@ -186,18 +190,18 @@ public class Calculator extends JFrame {
                         String BtnText = tempBtn.getText();
                         if (BtnText.equalsIgnoreCase("="))
                             text.setText(String.valueOf(calculate(
-                                    text.getText())));
+                            text.getText())));
                         else if (BtnText.equalsIgnoreCase("C"))
                             text.setText("");
                         else if (BtnText.equalsIgnoreCase("\u232B")) {
                             if (text.getText().length() > 0)
                                 text.setText(text.getText().substring(0,
-                                        text.getText().length() - 1));
+                                text.getText().length() - 1));
                         } else if (BtnText.equalsIgnoreCase("+")
-                                || BtnText.equalsIgnoreCase("-")
-                                || BtnText.equalsIgnoreCase("*")
-                                || BtnText.equalsIgnoreCase("/"))
-                            text.append(" " + BtnText + " ");
+                            || BtnText.equalsIgnoreCase("-")
+                            || BtnText.equalsIgnoreCase("*")
+                            || BtnText.equalsIgnoreCase("/"))
+                                text.append(" " + BtnText + " ");
                         else if (BtnText.equalsIgnoreCase("(-)"))
                             text.append("-");
                         else
@@ -212,6 +216,7 @@ public class Calculator extends JFrame {
     /**
      * PRE: requires a base and exponent
      * POST: return the result of a exponential expression
+     * 
      * @param base     base number
      * @param exponent exponent number
      * @return result -> result of a exponential expression
@@ -227,6 +232,7 @@ public class Calculator extends JFrame {
     /**
      * PRE: requires a starting value
      * POST: return the factorial of the value
+     * 
      * @param num starting value or value
      * @return result -> factorial of the value
      */
@@ -236,6 +242,6 @@ public class Calculator extends JFrame {
         if (num == 0)
             return (isNegative) ? -1 : 1;
         return (!isNegative) ? num * factorial(num - 1, isNegative)
-                : num * factorial(num + 1, isNegative);
+            : num * factorial(num + 1, isNegative);
     }
 }
