@@ -40,11 +40,10 @@ public class Calculator extends JFrame {
     private double calculate(String equ) {
         Scanner reader = new Scanner(equ);
         double res = 0;
-        String tmp = "";
 
         try {
             while (reader.hasNext()) {
-                tmp = reader.next();
+                String tmp = reader.next();
                 if (tmp.equalsIgnoreCase("*"))
                     res *= calcHelper(reader.next());
                 else if (tmp.equalsIgnoreCase("/"))
@@ -53,8 +52,7 @@ public class Calculator extends JFrame {
                     res += calcHelper(reader.next());
                 else if (tmp.equalsIgnoreCase("-"))
                     res -= calcHelper(reader.next());
-                else if (tmp.contains("-") || tmp.contains("!")
-                        || tmp.contains("^")) {
+                else if (tmp.contains("!") || tmp.contains("^")) {
                     res += calcHelper(tmp);
                 } else
                     res += Double.parseDouble(tmp);
