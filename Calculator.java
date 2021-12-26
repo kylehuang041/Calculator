@@ -6,7 +6,6 @@ import java.awt.event.*;
 /**
  * Java GUI Calculator: calculates from left to right with no order of
  * operations
- * 
  * @author Kyle Huang
  * @version 5.8
  * @since 12/23/2021
@@ -33,7 +32,6 @@ public class Calculator extends JFrame {
     /**
      * PRE: require string from textarea block
      * POST: calculates the expression from the string
-     * 
      * @param equ equation or expression
      * @return result of expression
      */
@@ -73,8 +71,8 @@ public class Calculator extends JFrame {
     /**
      * PRE: requires a String as input
      * POST: If the String contains "^", it would calculate the power.
-     *       If the String contains "!", it would calculate the factorial.
-     *       Otherwise, return the String.
+     * If the String contains "!", it would calculate the factorial.
+     * Otherwise, return the String.
      * @param tmp temporary String
      * @return finished calculation of power or factorial. Otherwise,
      *         the String itself from the beginning if it does not
@@ -94,7 +92,6 @@ public class Calculator extends JFrame {
     /**
      * PRE: requires size and name
      * POST: set the size and name of frame
-     * 
      * @param width  width of frame
      * @param height height of frame
      * @param name   name of frame
@@ -215,29 +212,30 @@ public class Calculator extends JFrame {
     /**
      * PRE: requires a base and exponent
      * POST: return the result of a exponential expression
-     * 
      * @param base     base number
      * @param exponent exponent number
      * @return result -> result of a exponential expression
      */
-    private double power(double base, double exponent) {
+    private static double power(double base, double exponent) {
         double res = 1;
-        for (int i = 1; i <= exponent; i++) {
+        for (int i = 1; i <= Math.abs(exponent); i++) {
             res *= base;
         }
-        return res;
+        return (exponent > 0) ? res : 1 / res;
     }
 
     /**
      * PRE: requires a starting value
      * POST: return the factorial of the value
-     * 
      * @param num starting value or value
      * @return result -> factorial of the value
      */
-    private double factorial(double num) {
+    private static double factorial(double num, boolean isNegative) {
+        if (num < 0)
+            isNegative = true;
         if (num == 0)
-            return 1;
-        return num * factorial(num - 1);
+            return (isNegative) ? -1 : 1;
+        return (!isNegative) ? num * factorial(num - 1, isNegative)
+                : num * factorial(num + 1, isNegative);
     }
 }
