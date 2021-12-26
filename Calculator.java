@@ -40,29 +40,24 @@ public class Calculator extends JFrame {
     private double calculate(String equ) {
         Scanner reader = new Scanner(equ);
         double res = 0;
+        String tmp = "";
 
         try {
             while (reader.hasNext()) {
-                String tmp = reader.next();
-                if (tmp.equalsIgnoreCase("+"))
-                    res += Double.parseDouble(reader.next());
-                else if (tmp.equalsIgnoreCase("-"))
-                    res -= Double.parseDouble(reader.next());
-                else if (tmp.contains("-")) {
-                    tmp = tmp.replace("(", "").replace(")", "");
-                    res += Double.parseDouble(tmp);
-                } else if (tmp.equalsIgnoreCase("*"))
-                    res *= Double.parseDouble(reader.next());
+                tmp = reader.next();
+                System.out.println(tmp);
+                if (tmp.equalsIgnoreCase("*"))
+                    res *= calcHelper(reader.next());
                 else if (tmp.equalsIgnoreCase("/"))
-                    res /= Double.parseDouble(reader.next());
-                else if (tmp.contains("^")) {
-                    String[] parts = tmp.replace("^", " ").split(" ");
-                    res += power(Double.parseDouble(parts[0]),
-                            Double.parseDouble(parts[1]));
-                } else if (tmp.contains("!")) {
-                    String[] parts = tmp.replace("!", " ").split(" ");
-                    System.out.println("!" + parts[0]);
-                    res += factorial(Double.parseDouble(parts[0]));
+                    res /= calcHelper(reader.next());
+                else if (tmp.equalsIgnoreCase("+"))
+                    res += calcHelper(reader.next());
+                else if (tmp.equalsIgnoreCase("-"))
+                    res -= calcHelper(reader.next());
+                else if (tmp.contains("-") || tmp.contains("!")
+                        || tmp.contains("^")) {
+                    System.out.println("other tmp");
+                    res += calcHelper(tmp);
                 } else
                     res += Double.parseDouble(tmp);
             }
@@ -73,10 +68,22 @@ public class Calculator extends JFrame {
         } catch (Exception e) {
             System.out.println("Error: finish the expression");
         } finally {
+            System.out.println(tmp);
             reader.close();
         }
 
         return res;
+    }
+
+    private double calcHelper(String tmp) {
+        if (tmp.contains("^")) {
+            String[] parts = tmp.replace("^", " ").split(" ");
+            return power(Double.parseDouble(parts[0]),
+                    Double.parseDouble(parts[1]));
+        } else if (tmp.contains("!")) {
+            return factorial(Double.parseDouble(tmp.replace("!", "")));
+        }
+        return Double.parseDouble(tmp);
     }
 
     /**
@@ -183,18 +190,16 @@ public class Calculator extends JFrame {
                         else if (BtnText.equalsIgnoreCase("\u232B")) {
                             if (text.getText().length() > 0)
                                 text.setText(text.getText().substring(0,
-                                    text.getText().length() - 1));
+                                        text.getText().length() - 1));
                         } else if (BtnText.equalsIgnoreCase("+")
                                 || BtnText.equalsIgnoreCase("-")
                                 || BtnText.equalsIgnoreCase("*")
                                 || BtnText.equalsIgnoreCase("/"))
                             text.append(" " + BtnText + " ");
-                        else {
-                            if (BtnText.equalsIgnoreCase("(-)")) {
-                                text.append(BtnText.replace("(", "").replace(")",
-                                ""));
-                            } else text.append(BtnText);
-                        }
+                        else if (BtnText.equalsIgnoreCase("(-)"))
+                            text.append("-");
+                        else
+                            text.append(BtnText);
                     }
                 });
                 this.frame.add(temp.get(j));
@@ -205,7 +210,8 @@ public class Calculator extends JFrame {
     /**
      * PRE: requires a base and exponent
      * POST: return the result of a exponential expression
-     * @param base base number
+     * 
+     * @param base     base number
      * @param exponent exponent number
      * @return result -> result of a exponential expression
      */
@@ -220,11 +226,13 @@ public class Calculator extends JFrame {
     /**
      * PRE: requires a starting value
      * POST: return the factorial of the value
+     * 
      * @param num starting value or value
      * @return result -> factorial of the value
      */
     private double factorial(double num) {
-        if (num == 0) return 1;
+        if (num == 0)
+            return 1;
         return num * factorial(num - 1);
     }
 }
