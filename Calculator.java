@@ -84,7 +84,7 @@ public class Calculator extends JFrame {
             return power(Double.parseDouble(parts[0]),
                     Double.parseDouble(parts[1]));
         } else if (tmp.contains("!")) {
-            return factorial(Double.parseDouble(tmp.replace("!", "")));
+            return factorial(Double.parseDouble(tmp.replace("!", "")), false);
         }
         return Double.parseDouble(tmp);
     }
