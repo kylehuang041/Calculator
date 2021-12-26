@@ -45,7 +45,6 @@ public class Calculator extends JFrame {
         try {
             while (reader.hasNext()) {
                 tmp = reader.next();
-                System.out.println(tmp);
                 if (tmp.equalsIgnoreCase("*"))
                     res *= calcHelper(reader.next());
                 else if (tmp.equalsIgnoreCase("/"))
@@ -56,7 +55,6 @@ public class Calculator extends JFrame {
                     res -= calcHelper(reader.next());
                 else if (tmp.contains("-") || tmp.contains("!")
                         || tmp.contains("^")) {
-                    System.out.println("other tmp");
                     res += calcHelper(tmp);
                 } else
                     res += Double.parseDouble(tmp);
@@ -68,13 +66,22 @@ public class Calculator extends JFrame {
         } catch (Exception e) {
             System.out.println("Error: finish the expression");
         } finally {
-            System.out.println(tmp);
             reader.close();
         }
 
         return res;
     }
 
+    /**
+     * PRE: requires a String as input
+     * POST: If the String contains "^", it would calculate the power.
+     *       If the String contains "!", it would calculate the factorial.
+     *       Otherwise, return the String.
+     * @param tmp temporary String
+     * @return finished calculation of power or factorial. Otherwise,
+     *         the String itself from the beginning if it does not
+     *         contain "^" (power) or "!" (factorial).
+     */
     private double calcHelper(String tmp) {
         if (tmp.contains("^")) {
             String[] parts = tmp.replace("^", " ").split(" ");
