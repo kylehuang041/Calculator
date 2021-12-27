@@ -12,6 +12,11 @@ import java.awt.event.*;
  * @since 12/23/2021
  */
 public class Calculator extends JFrame {
+
+    public static void main(String[] args) {
+        Calculator calculator = new Calculator();
+    }
+
     private JFrame frame;
     private JTextArea text;
     private JButton zero, one, two, three, four, five, six, seven, eight,
