@@ -38,7 +38,6 @@ public class Calculator extends JFrame {
     /**
      * PRE: require string from textarea block
      * POST: calculates the expression from the string
-     * 
      * @param equ equation or expression
      * @return result of expression
      */
@@ -80,7 +79,6 @@ public class Calculator extends JFrame {
      * POST: If the String contains "^", it would calculate the power.
      * If the String contains "!", it would calculate the factorial.
      * Otherwise, return the String.
-     * 
      * @param tmp temporary String
      * @return finished calculation of power or factorial. Otherwise,
      *         the String itself from the beginning if it does not
@@ -100,7 +98,6 @@ public class Calculator extends JFrame {
     /**
      * PRE: requires size and name
      * POST: set the size and name of frame
-     * 
      * @param width  width of frame
      * @param height height of frame
      * @param name   name of frame
@@ -117,7 +114,6 @@ public class Calculator extends JFrame {
     /**
      * PRE: requires coordinates and size
      * POST: set the coordinates and size of text area
-     * 
      * @param x starting x-coordinate of text area
      * @param y starting y-coordinate of text area
      * @param w width of text area
@@ -136,7 +132,6 @@ public class Calculator extends JFrame {
     /**
      * PRE: requires size of buttons
      * POST: creates the buttons and its functionalities
-     * 
      * @param w width of buttons
      * @param h height of buttons
      */
@@ -221,7 +216,6 @@ public class Calculator extends JFrame {
     /**
      * PRE: requires a base and exponent
      * POST: return the result of a exponential expression
-     * 
      * @param base     base number
      * @param exponent exponent number
      * @return result -> result of a exponential expression
@@ -237,7 +231,6 @@ public class Calculator extends JFrame {
     /**
      * PRE: requires a starting value
      * POST: return the factorial of the value
-     * 
      * @param num starting value or value
      * @return result -> factorial of the value
      */
