@@ -6,7 +6,6 @@ import java.awt.event.*;
 /**
  * Java GUI Calculator: calculates from left to right with no order of
  * operations
- * 
  * @author Kyle Huang
  * @version 5.8
  * @since 12/23/2021
@@ -235,6 +234,7 @@ public class Calculator extends JFrame {
      * @return result -> factorial of the value
      */
     private static double factorial(double num, boolean isNegative) {
+        num = Math.round(num);
         if (num < 0)
             isNegative = true;
         if (num == 0)
