@@ -220,7 +220,7 @@ public class Calculator extends JFrame {
     /**
      * PRE: requires a base and exponent
      * POST: return the result of a exponential expression
-     * @param base     base number
+     * @param base base number
      * @param exponent exponent number
      * @return result -> result of a exponential expression
      */
@@ -233,7 +233,7 @@ public class Calculator extends JFrame {
     }
 
     /**
-     * PRE: requires a starting value
+     * PRE: requires a starting integer value
      * POST: return the factorial of the value
      * @param num starting value or value
      * @return result -> factorial of the value
