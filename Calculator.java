@@ -20,7 +20,7 @@ public class Calculator extends JFrame {
     private JTextArea text;
     private JButton zero, one, two, three, four, five, six, seven, eight,
             nine, add, subtract, multiply, divide, clear, delete, equal,
-            negative, power, factorial, decimal;
+            negative, power, factorial, decimal, pi;
 
     /**
      * PRE: requires coordinates and name for frame,
@@ -55,10 +55,9 @@ public class Calculator extends JFrame {
                     res += calcHelper(reader.next());
                 else if (tmp.equalsIgnoreCase("-"))
                     res -= calcHelper(reader.next());
-                else if (tmp.contains("!") || tmp.contains("^")) {
-                    res += calcHelper(tmp);
-                } else
-                    res += Double.parseDouble(tmp);
+                else if (tmp.contains("!") || tmp.contains("^")) res += calcHelper(tmp);
+                else if (tmp.contains("\u03c0")) res += calcHelper(tmp);
+                else res += Double.parseDouble(tmp);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Error: Numbers split");
@@ -90,6 +89,11 @@ public class Calculator extends JFrame {
                     Double.parseDouble(parts[1]));
         } else if (tmp.contains("!")) {
             return factorial(Double.parseDouble(tmp.replace("!", "")), false);
+        } else if (tmp.contains("\u03c0")) {
+            final double PI = 3.14159265359;
+            if (tmp.equalsIgnoreCase("\u03c0")) return PI;
+            String[] parts = tmp.split("\u03c0");
+            return Double.parseDouble(parts[0])* PI;
         }
         return Double.parseDouble(tmp);
     }
@@ -157,6 +161,7 @@ public class Calculator extends JFrame {
         power = new JButton("^");
         factorial = new JButton("!");
         decimal = new JButton(".");
+        pi = new JButton("\u03c0");
 
         // variables
         int gap = (this.frame.getWidth() - (4 * w)) / 5, startX = 10,
@@ -171,7 +176,7 @@ public class Calculator extends JFrame {
                 divide)));
         list.add(new ArrayList<>(Arrays.asList(negative, power, factorial,
                 equal)));
-        list.add(new ArrayList<>(Arrays.asList(decimal)));
+        list.add(new ArrayList<>(Arrays.asList(decimal, pi)));
 
         // place and add buttons onto screen
         for (int i = 0; i < list.size(); i++) {
