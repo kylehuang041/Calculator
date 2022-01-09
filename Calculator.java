@@ -60,11 +60,11 @@ public class Calculator extends JFrame {
                 else res += Double.parseDouble(tmp);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Error: Numbers split");
+            System.out.println("Error: Number split");
         } catch (NumberFormatException e) {
             System.out.println("Error: Number formating");
         } catch (Exception e) {
-            System.out.println("Error: finish the expression");
+            System.out.println("Error: Finish the expression");
         } finally {
             reader.close();
         }
