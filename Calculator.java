@@ -111,7 +111,6 @@ public class Calculator extends JFrame {
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.frame.setResizable(false);
         this.frame.setLayout(null);
-        this.frame.setVisible(true);
     }
 
     /**
@@ -215,6 +214,7 @@ public class Calculator extends JFrame {
                 this.frame.add(temp.get(j));
             }
         }
+        this.frame.setVisible(true);
     }
 
     /**
