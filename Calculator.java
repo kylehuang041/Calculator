@@ -143,6 +143,7 @@ public class Calculator extends JFrame {
 						String BtnText = tempBtn.getText();
 						// result
 						if (BtnText.equalsIgnoreCase("=")) {
+							System.out.println(text.getText());
 							text.setText(String.valueOf(Calculation.solve(text.getText())));
 							// Clear
 						} else if (BtnText.equalsIgnoreCase("C")) {
@@ -151,6 +152,15 @@ public class Calculator extends JFrame {
 						} else if (BtnText.equalsIgnoreCase("\u232B")) {
 							if (text.getText().length() > 0)
 								text.setText(text.getText().substring(0, text.getText().length() - 1));
+						} else if (BtnText.equalsIgnoreCase("(")) {
+							String txt = text.getText();
+							if (Calculation.isNumber(String.valueOf(txt.charAt(txt.length() - 1))))
+								text.append(' ' + BtnText + ' ');
+							else
+								text.append(BtnText + ' ');
+							// Operators
+						} else if (BtnText.equalsIgnoreCase(")")) {
+							text.append(' ' + BtnText);
 							// Operators
 						} else if (BtnText.equalsIgnoreCase("+")
 								|| BtnText.equalsIgnoreCase("-")

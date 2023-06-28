@@ -5,7 +5,7 @@ class Calculation {
 	private static Stack<Character> operators = new Stack<>();
 
 	public static double solve(String str) {
-		String[] parts = str.split(" ");
+		String[] parts = str.split("\\s+");
 		int i = 0;
 		// traverse through expression
 		while (i < parts.length) {
@@ -32,7 +32,10 @@ class Calculation {
 				// if current string is an integer, add to number to operands
 			} else if (isNumber(parts[i])) {
 				operands.push(Double.parseDouble(parts[i]));
-				// if current string is PI
+				if (parts[i + 1].equals("(")) {
+					operators.push('*');
+				}
+			// push operators
 			} else {
 				operators.push(parts[i].charAt(0));
 			}
@@ -66,7 +69,7 @@ class Calculation {
 		}
 	}
 
-	private static boolean isNumber(String str) {
+	public static boolean isNumber(String str) {
 		return str.matches("-?\\d+(\\.\\d+)?");
 	}
 
