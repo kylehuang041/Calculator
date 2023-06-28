@@ -53,7 +53,7 @@ class Calculation {
 					tokens.push('*');
 				}
 				// push operators
-			} else if (isOperator(parts[i].charAt(0))) {
+			} else if (isOperator(parts[i])) {
 				while (!tokens.empty() && tokens.peek() != '(' && isOperatorLessEqualTo(parts[i].charAt(0), tokens.peek())) {
 					postfix.add(String.valueOf(tokens.pop()));
 				}
@@ -79,9 +79,8 @@ class Calculation {
 		int i = 0;
 
 		while (i < postfix.size()) {
-			
 			// if operator, then perform the calculation with two operands
-			if (postfix.get(i).length() == 1 && isOperator(postfix.get(i).charAt(0))) {
+			if (isOperator(postfix.get(i))) {
 				char operator = postfix.get(i).charAt(0);
 				double op2 = Double.parseDouble(stack.pop());
 				double op1 = Double.parseDouble(stack.pop());
@@ -101,8 +100,10 @@ class Calculation {
 	 * POST: returns if c is a mathematical operator (+, -, *, /, ^, %)
 	 * @return boolean
 	 */
-	private static boolean isOperator(char c) {
-		return c == '+' || c == '-' || c == '*' || c == '/' || c == '^' || c == '%';
+	private static boolean isOperator(String str) {
+		return str.length() == 1 && str.equals("+") || str.equals("-")
+				|| str.equals("*") || str.equals("/") || str.equals("^")
+				|| str.equals("%");
 	}
 
 	/**
