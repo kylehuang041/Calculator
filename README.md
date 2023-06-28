@@ -4,4 +4,4 @@ Calculator app using postfix notation to calculate an expression.
 
 # Run
 
-Download Calculator.exe and run it!
+Clone Repository and type make in bash terminal or download Calculator.exe and run it.
