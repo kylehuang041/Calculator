@@ -15,8 +15,13 @@ class Calculation {
 				double operand = Double.parseDouble(parts[i].substring(0, parts[i].length() - 1));
 				operands.push(factorial(operand));
 				// if current string contains PI, then add to operand
-			} else if (parts[i].charAt(0) == '\u03c0') {
-				operands.push(Math.PI);
+			} else if (parts[i].contains("\u03c0")) {
+				if (parts[i].charAt(0) == '\u03c0')
+					operands.push(Math.PI);
+				else {
+					double num = Double.parseDouble(parts[i].substring(0, parts[i].length() - 1));
+					operands.push(Math.PI * num);
+				}
 				// oif current string is a square root, then add to operand
 			} else if (parts[i].charAt(0) == '\u221A') {
 				operands.push(Math.sqrt(operands.pop()));
