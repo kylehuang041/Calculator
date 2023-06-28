@@ -1,2 +1,5 @@
 # Calculator (Java, GUI)
-Calculates from left to right without order of operations
+
+Calculator app uses postfix notation to calculate an expression
+
+# Run
