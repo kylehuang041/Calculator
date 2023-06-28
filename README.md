@@ -4,4 +4,12 @@ Calculator app using postfix notation to calculate an expression.
 
 # Run
 
-Clone Repository and type make in bash terminal or download Calculator.exe and run it.
+VS Code:
+
+* Clone repository
+* Install Extenstion Pack for Java.
+* Click Run above main method in src/Calculator.java
+
+Linux terminal (bad GUI): type make in terminal
+
+Executable (not working): Install Calculator.exe and open it
