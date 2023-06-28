@@ -9,12 +9,17 @@ class Calculation {
 		return calculatePostFix(strArr);
 	}
 
+	/**
+	 * PRE: requires a String str that contains the infix expression
+	 * POST: converts it to postfix notation
+	 * @return String
+	 */
 	private static ArrayList<String> convertToPostFix(String str) {
 		String[] parts = str.split("\\s+");
 		Stack<Character> tokens = new Stack<>();
 		ArrayList<String> postfix = new ArrayList<>();
 		int i = 0;
-
+	
 		// traverse through expression
 		while (i < parts.length) {
 			// if factorial number
@@ -56,25 +61,34 @@ class Calculation {
 			}
 			++i;
 		}
-
+	
 		while (!tokens.empty())
 			postfix.add(String.valueOf(tokens.pop()));
 		return postfix;
 	}
-
+	
+	/**
+	 * PRE: requires a filled postfix ArrayList containing the postfix expression from infix
+	 * POST: outputs the postfix result
+	 * @return String
+	 */
 	private static String calculatePostFix(ArrayList<String> postfix) {
+		if (postfix.size() <= 1) return postfix.remove(0);
+
 		Stack<String> stack = new Stack<>();
 		int i = 0;
 
 		while (i < postfix.size()) {
-			if (isOperator(postfix.get(i).charAt(0))) {
+			
+			// if operator, then perform the calculation with two operands
+			if (postfix.get(i).length() == 1 && isOperator(postfix.get(i).charAt(0))) {
 				char operator = postfix.get(i).charAt(0);
 				double op2 = Double.parseDouble(stack.pop());
 				double op1 = Double.parseDouble(stack.pop());
 				double result = calculate(op1, op2, operator);
 				stack.push(String.valueOf(result));
 			} else {
-				stack.push(postfix.get(i));
+				stack.push(postfix.get(i)); // push the numbers onto stack
 			}
 			++i;
 		}
@@ -82,10 +96,20 @@ class Calculation {
 		return stack.pop();
 	}
 
+	/**
+	 * PRE: requires a character c
+	 * POST: returns if c is a mathematical operator (+, -, *, /, ^, %)
+	 * @return boolean
+	 */
 	private static boolean isOperator(char c) {
 		return c == '+' || c == '-' || c == '*' || c == '/' || c == '^' || c == '%';
 	}
 
+	/**
+	 * PRE: requires two operators x and y
+	 * POST: compares x and y if x is less than or equal to y according to order of precedence
+	 * @return boolean
+	 */
 	private static boolean isOperatorLessEqualTo(char x, char y) {
 		// if x < y in terms of operator precedence order, return true
 		if ((x == '+' || x == '-') && (y == '*' || y == '/' || y == '%' || y == '^'))
@@ -105,6 +129,11 @@ class Calculation {
 			return false;
 	}
 
+	/**
+	 * PRE: requires two operands (double) and an operator (char)
+	 * POST: returns the output calculation (operand1 operator operand2)
+	 * @return double
+	 */
 	private static double calculate(double operand1, double operand2, char operator) {
 		if (operator == '*') {
 			return operand1 * operand2;
@@ -122,6 +151,11 @@ class Calculation {
 		throw new IllegalArgumentException();
 	}
 
+	/**
+	 * PRE: requires a string
+	 * POST: returns true if the string contains a number. otherwise return fals
+	 * @return boolean
+	 */
 	public static boolean isNumber(String str) {
 		return str.matches("-?\\d+(\\.\\d+)?");
 	}
@@ -134,6 +168,7 @@ class Calculation {
 	 */
 	private static double factorial(double num) {
 		boolean isNegative = num < 0 ? true : false;
-		return isNegative ? -1 * Gamma.gamma(num) : Gamma.gamma(num);
+		num = Math.abs(num);
+		return isNegative ? -Gamma.gamma(num + 1) : Gamma.gamma(num + 1);
 	}
 }
