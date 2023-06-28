@@ -81,11 +81,8 @@ class Calculation {
 	 * @return result -> factorial of the value
 	 */
 	private static double factorial(double num) {
-		boolean isNegative = false;
-    if (num < 0) {
-			isNegative = true;
-			num = Math.abs(num + 1);
-    }
-    return (isNegative ? -1 : 1) * Gamma.gamma(num);
+		boolean isNegative = num < 0 ? true : false;
+		num = Math.abs(num);
+		return isNegative ? -Gamma.gamma(num + 1) : Gamma.gamma(num + 1);
 	}
 }
