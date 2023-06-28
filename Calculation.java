@@ -32,7 +32,7 @@ class Calculation {
 				// if current string is an integer, add to number to operands
 			} else if (isNumber(parts[i])) {
 				operands.push(Double.parseDouble(parts[i]));
-				if (parts[i + 1].equals("(")) {
+				if (i + 1 < parts.length && parts[i + 1].equals("(")) {
 					operators.push('*');
 				}
 			// push operators
