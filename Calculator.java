@@ -143,7 +143,8 @@ public class Calculator extends JFrame {
 						String BtnText = tempBtn.getText();
 						// result
 						if (BtnText.equalsIgnoreCase("=")) {
-							text.setText(String.valueOf(Calculation.solve(text.getText())));
+							if (text.getText().length() > 0)
+								text.setText(String.valueOf(Calculation.solve(text.getText())));
 							// Clear
 						} else if (BtnText.equalsIgnoreCase("C")) {
 							text.setText("");
