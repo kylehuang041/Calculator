@@ -1,8 +1,14 @@
 import java.util.Stack;
 
 class Calculation {
-	private static Stack<Double> operands = new Stack<>();
-	private static Stack<Character> operators = new Stack<>();
+
+	private static String convertToPostFix(String str) {
+		String[] parts = 
+		Stack<Character> operators = new Stack<>();
+		String postfix = "";
+
+		for (String )
+	}
 
 	public static double solve(String str) {
 		String[] parts = str.split("\\s+");
