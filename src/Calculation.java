@@ -1,4 +1,5 @@
 import java.util.Stack;
+import org.apache.commons.math3.special.Gamma;
 
 class Calculation {
 	private static Stack<Double> operands = new Stack<>();
@@ -12,8 +13,7 @@ class Calculation {
 			// if factorial number
 			if (parts[i].contains("!")) {
 				double operand = Double.parseDouble(parts[i].substring(0, parts[i].length() - 1));
-				boolean isNegative = operand < 0 ? true : false;
-				operands.push(factorial(operand, isNegative));
+				operands.push(factorial(operand));
 				// if current string contains PI, then add to operand
 			} else if (parts[i].charAt(0) == '\u03c0') {
 				operands.push(Math.PI);
@@ -80,13 +80,9 @@ class Calculation {
 	 * @param num starting value or value
 	 * @return result -> factorial of the value
 	 */
-	private static double factorial(double num, boolean isNegative) {
-		num = Math.round(num);
-		if (num < 0)
-			isNegative = true;
-		if (num == 0)
-			return (isNegative) ? -1 : 1;
-		return (!isNegative) ? num * factorial(num - 1, isNegative)
-				: num * factorial(num + 1, isNegative);
+	private static double factorial(double num) {
+		boolean isNegative = num < 0 ? true : false;
+		num = Math.abs(num);
+		return isNegative ? -Gamma.gamma(num + 1) : Gamma.gamma(num + 1);
 	}
 }
