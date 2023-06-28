@@ -1,2 +1,3 @@
 # Calculator (Java, GUI)
-Calculates from left to right without order of operations
+
+Calculates without the order of precedence
