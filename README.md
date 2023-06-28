@@ -1,7 +1,7 @@
 # Calculator (Java, GUI)
 
-Calculator app uses postfix notation to calculate an expression
+Calculator app using postfix notation to calculate an expression.
 
 # Run
 
-O
+Download Calculator.exe and run it
