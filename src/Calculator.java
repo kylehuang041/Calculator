@@ -157,7 +157,7 @@ public class Calculator extends JFrame {
 								text.setText(text.getText().substring(0, text.getText().length() - 1));
 						} else if (BtnText.equalsIgnoreCase("(")) {
 							String txt = text.getText();
-							if (Calculation.isNumber(String.valueOf(txt.charAt(txt.length() - 1))))
+							if (text.getText().length() > 1 && Calculation.isNumber(String.valueOf(txt.charAt(txt.length() - 1))))
 								text.append(' ' + BtnText + ' ');
 							else
 								text.append(BtnText + ' ');
@@ -174,7 +174,8 @@ public class Calculator extends JFrame {
 								|| BtnText.equalsIgnoreCase("(")
 								|| BtnText.equalsIgnoreCase(")")
 								) {
-							text.append(' ' + BtnText + ' ');
+							if (text.getText().length() <= 0) text.append(BtnText + ' ');
+							else text.append(' ' + BtnText + ' ');
 							// negative
 						} else if (BtnText.equalsIgnoreCase("(-)")) {
 							text.append("-");

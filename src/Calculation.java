@@ -3,7 +3,12 @@ import java.util.Stack;
 import org.apache.commons.math3.special.Gamma;
 
 class Calculation {
-
+	/**
+	 * Solve wrapper function
+	 * PRE: requires a infix expression (String)
+	 * POST: returns the calculated output
+	 * @return String
+	 */
 	public static String solve(String str) {
 		ArrayList<String> strArr = convertToPostFix(str);
 		return calculatePostFix(strArr);
@@ -116,9 +121,13 @@ class Calculation {
 		if ((x == '+' || x == '-') && (y == '*' || y == '/' || y == '%' || y == '^'))
 			return true;
 
+		else if ((x == '*' || x == '/' || x == '%') && y == '^') {
+			return true;
+		}
+
 		// if x == y in terms of operator high precedence order, return true
-		else if ((x == '*' || x == '/' || x == '%' || x == '^') && (y == '*' || y == '/'
-				|| y == '%' || y == '^'))
+		else if (((x == '*' || x == '/' || x == '%') && (y == '*' || y == '/'
+				|| y == '%')) || (x == '^' && y == '^'))
 			return true;
 
 		// if x == y in terms of operator low precedence order, return true
