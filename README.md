@@ -4,7 +4,7 @@ Calculator app using postfix notation to calculate an expression.
 
 # Run
 
-VS Code:
+VS Code (recommended):
 
 * Clone repository
 * Install Extenstion Pack for Java.
@@ -12,6 +12,4 @@ VS Code:
 
 Linux terminal (bad GUI): type make in terminal
 
-Executable (not working): Install Calculator.exe and open it
-
-Download Calculator.exe and run it
+Executable (not working): Download Calculator.exe and run it
