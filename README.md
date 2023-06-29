@@ -2,7 +2,7 @@
 
 Calculator app using postfix notation to calculate an expression.
 
-# Run
+## Run
 
 VS Code (recommended):
 
@@ -13,3 +13,7 @@ VS Code (recommended):
 Linux terminal (bad GUI): type make in terminal
 
 Executable (not working): Download Calculator.exe and run it
+
+## Demo
+
+![Calculator Demo](./src/img/calculator-demo.gif "Calculator Demo")
